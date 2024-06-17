@@ -1,4 +1,6 @@
 # AVH-MLOps_Examples
+[![CMSIS Compliance](https://img.shields.io/github/actions/workflow/status/Arm-Examples/AVH-MLOps_Examples/verify.yml?logo=arm&logoColor=0091bd&label=CMSIS%20Compliance)](https://www.keil.arm.com/cmsis) 
+
 This repo contains various example projects that show how to use the CMSIS-Toolbox workflows in an MLOps context.
 
 ## Directory Structure
