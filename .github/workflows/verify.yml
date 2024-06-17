@@ -41,7 +41,7 @@ jobs:
           project-file: ./TFLmicrospeech/MLOps.csolution.yml
           API_TOKEN: ${{ secrets.CMSIS_API_KEY }}
   verify-cmsis-compliance-mlek-kws:
-    name: Verify CMSIS Compliance
+    name: Verify CMSIS Compliance mlek-kws
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
