@@ -1,0 +1,21 @@
+name: Verify CMSIS Compliance AVH-MLOps-main
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  verify-cmsis-compliance-VH-MLOps-main:
+    name: Verify CMSIS Compliance VH-MLOps-main
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Arm-Examples/verify-cmsis-example-action@latest
+        name: Verify CMSIS Compliance VH-MLOps-main
+        with:
+          branch: ${{ github.ref }}
+          project-file: ./AVH-MLOps-main/MLOps.csolution.yml
+          API_TOKEN: ${{ secrets.CMSIS_API_KEY }}
+          output-artifact: output-VH-MLOps-main

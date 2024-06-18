@@ -1,0 +1,21 @@
+name: Verify CMSIS Compliance TFLmicrospeech
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  verify-cmsis-compliance-TFLmicrospeech:
+    name: Verify CMSIS Compliance TFLmicrospeech
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Arm-Examples/verify-cmsis-example-action@latest
+        name: Verify CMSIS Compliance TFLmicrospeech
+        with:
+          branch: ${{ github.ref }}
+          project-file: ./TFLmicrospeech/MLOps.csolution.yml
+          API_TOKEN: ${{ secrets.CMSIS_API_KEY }}
+          output-artifact: output-TFLmicrospeech

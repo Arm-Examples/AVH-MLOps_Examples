@@ -1,0 +1,21 @@
+name: Verify CMSIS Compliance mlek-kws
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  verify-cmsis-compliance-mlek-kws:
+    name: Verify CMSIS Compliance mlek-kws
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Arm-Examples/verify-cmsis-example-action@latest
+        name: Verify CMSIS Compliance mlek-kws
+        with:
+          branch: ${{ github.ref }}
+          project-file: ./mlek-kws/MLOps.csolution.yml
+          API_TOKEN: ${{ secrets.CMSIS_API_KEY }}
+          output-artifact: output-mlek-kws
