@@ -1,4 +1,5 @@
 # MLEK Keyword Spotting (KWS)
+[![CMSIS Compliance](https://img.shields.io/github/actions/workflow/status/Arm-Examples/AVH-MLOps_Examples/verify-mlek-kws.yml?logo=arm&logoColor=0091bd&label=CMSIS%20Compliance)](https://www.keil.arm.com/cmsis)
 
 Base Directory: `mlek-kws`
 

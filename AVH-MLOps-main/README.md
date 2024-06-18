@@ -1,4 +1,5 @@
 # AVH MLOps Test
+[![CMSIS Compliance](https://img.shields.io/github/actions/workflow/status/Arm-Examples/AVH-MLOps_Examples/verify-AVH-MLOps-main.yml?logo=arm&logoColor=0091bd&label=CMSIS%20Compliance)](https://www.keil.arm.com/cmsis)
 
 Base Directory: `AVH-MLOps-main`
 
