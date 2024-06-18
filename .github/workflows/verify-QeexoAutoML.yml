@@ -18,6 +18,7 @@ jobs:
         name: Verify CMSIS Compliance QeexoAutoML
         with:
           branch: ${{ github.ref }}
-          project-file: ./QeexoAutoML/MLOps.csolution.yml
+          project-directory: ${{ github.workspace }}/QeexoAutoML
+          project-file: MLOps.csolution.yml
           API_TOKEN: ${{ secrets.CMSIS_API_KEY }}
           output-artifact: output-QeexoAutoML

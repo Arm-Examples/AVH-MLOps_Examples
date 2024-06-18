@@ -18,6 +18,7 @@ jobs:
         name: Verify CMSIS Compliance VH-MLOps-main
         with:
           branch: ${{ github.ref }}
-          project-file: ./AVH-MLOps-main/MLOps.csolution.yml
+          project-directory: ${{ github.workspace }}/AVH-MLOps-main
+          project-file: MLOps.csolution.yml
           API_TOKEN: ${{ secrets.CMSIS_API_KEY }}
           output-artifact: output-VH-MLOps-main

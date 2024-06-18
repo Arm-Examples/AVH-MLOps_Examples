@@ -18,6 +18,7 @@ jobs:
         name: Verify CMSIS Compliance TFLmicrospeech
         with:
           branch: ${{ github.ref }}
-          project-file: ./TFLmicrospeech/MLOps.csolution.yml
+          project-directory: ${{ github.workspace }}/TFLmicrospeech
+          project-file: MLOps.csolution.yml
           API_TOKEN: ${{ secrets.CMSIS_API_KEY }}
           output-artifact: output-TFLmicrospeech

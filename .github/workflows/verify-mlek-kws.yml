@@ -18,6 +18,7 @@ jobs:
         name: Verify CMSIS Compliance mlek-kws
         with:
           branch: ${{ github.ref }}
-          project-file: ./mlek-kws/MLOps.csolution.yml
+          project-directory: ${{ github.workspace }}/mlek-kws
+          project-file: MLOps.csolution.yml
           API_TOKEN: ${{ secrets.CMSIS_API_KEY }}
           output-artifact: output-mlek-kws
