@@ -1,0 +1,71 @@
+# Searches for vcpkg-configuration.json and vcpkg-run-configuration.json files
+# across GitHub organizations and produces a summary CSV file.
+#
+# Organizations searched:
+#   - Arm-Examples
+#   - Arm-Software
+#   - Open-CMSIS-Pack
+#   - MDK-packs
+#
+# The resulting CSV is uploaded as a workflow artifact and, when running on the
+# default branch, committed back to the repository.
+
+name: Search vcpkg Configuration Files
+
+on:
+  # Run on a weekly schedule (every Monday at 06:00 UTC)
+  schedule:
+    - cron: "0 6 * * 1"
+  # Allow manual execution
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  search:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Search for vcpkg configuration files and generate CSV
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 scripts/search_vcpkg_configs.py \
+            --output vcpkg_configurations.csv
+
+      - name: Upload CSV as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vcpkg-configurations
+          path: vcpkg_configurations.csv
+          retention-days: 90
+
+      - name: Get default branch name
+        id: default-branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DEFAULT=$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name')
+          echo "name=${DEFAULT}" >> "$GITHUB_OUTPUT"
+
+      - name: Commit updated CSV to repository
+        if: github.ref_name == steps.default-branch.outputs.name
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add vcpkg_configurations.csv
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Update vcpkg configurations summary CSV [skip ci]"
+            git push
+          fi
